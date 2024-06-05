@@ -1,5 +1,6 @@
 package dio.web.api.controller;
 
+import dio.web.api.model.Usuario;
 import dio.web.api.repository.UserRepository;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,25 +15,23 @@ public class UserController {
     @Autowired
     private UserRepository repository;
     @GetMapping
-    public List<User> list(){
+    public List<Usuario> list(){
         return repository.findAll();
     }
     @PostMapping
-    public void save(@RequestBody User user){
-        repository.save(user);
+    public void save(@RequestBody Usuario usuario){
+        repository.save(usuario);
     }
     @PutMapping
-    public void update(@RequestBody User user){
-        repository.save(user);
+    public void update(@RequestBody Usuario usuario){
+        repository.save(usuario);
     }
     @GetMapping("/{username}")
     public User find(@PathVariable("/username") String username){
-        return repository.findByUsername(username);
+        return (User) repository.findByUsername(username);
     }
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("/id") Integer id){
         repository.deleteById(id);
     }
-}
-
 }
